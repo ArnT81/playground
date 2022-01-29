@@ -1,0 +1,11 @@
+.button {
+    cursor: pointer;
+    /* text-transform: capitalize; */
+    font-size: 18px;
+}
+
+.img {
+    /* background: purple; */
+    stroke: red;
+    fill: red;
+}
