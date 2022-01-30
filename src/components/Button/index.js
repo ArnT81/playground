@@ -5,77 +5,53 @@ import styles from './button.module.css'
 /* 
 *   Types: text / outline / filled
 *   Buttontext: title / props.children
-*   iconSize: 30px default
-*   iconRight: false default
+*   icon: may be added as props
+*   iconRight: may be added to render the icon to the right of the text
+*   color, padding & iconsize should not be altered in props if you want consistency throughout the app
 */
-
+//todo padding for the case both text & icon are added as children or only icon is in button
 export default function Button({ type, title, children, color, padding, icon, iconSize, iconRight }) {
+    let location, margin, styling;
 
+    //  Determin wheter icon (if provided as prop) should render on left or right side of text 
+    function TextAndIcon() {
+        if (iconRight) {
+            location = 'row-reverse';
+            margin = '0 0 0 10px';
+        } else {
+            location = 'row';
+            margin = '0 10px 0 0';
+        }
+        return (
+            <div style={{ display: 'flex', alignItems: 'center', flexDirection: location }}>
+                {icon && <img src={icon} style={{ width: iconSize, margin, fill: color }} />}
+                {children || title}
+            </div>
+        )
+    }
+
+    //  Determin Buttontype to render
     switch (type) {
         case 'text':
-            return (
-                !iconRight ?
-                    <div
-                        role="button"
-                        style={{ color, padding }}
-                        className={styles.button}
-                    >
-                        {icon && <img src={icon} style={{ width: iconSize, marginRight: 10, fill: color }} />}
-                        {title || children || 'title or children'}
-                    </div>
-                    :
-                    <div
-                        role="button"
-                        style={{ color, padding }}
-                        className={styles.button}
-                    >
-                        {title || children || 'title or children'}
-                        {icon && <img src={icon} style={{ width: iconSize, marginLeft: 10, fill: color }} />}
-                    </div>
-            )
+            styling = { color, padding };
+            break;
         case 'outlined':
-            return (
-                !iconRight ?
-                    <div
-                        role="button"
-                        className={styles.button}
-                        style={{ color, padding, border: `3px solid ${color}` }}
-                    >
-                        {icon && <img src={icon} style={{ width: iconSize, marginRight: 10, fill: color }} />}
-                        {title || children || 'title or children'}
-                    </div>
-                    :
-                    <div
-                        role="button"
-                        className={styles.button}
-                        style={{ color, padding, border: `3px solid ${color}` }}
-                    >
-                        {title || children || 'title or children'}
-                        {icon && <img src={icon} style={{ width: iconSize, marginLeft: 10, fill: color }} />}
-                    </div>
-            )
+            styling = { color, padding, border: `3px solid ${color}` };
+            break;
         case 'filled':
-            return (
-                !iconRight ?
-                    <div
-                        role="button"
-                        className={styles.button}
-                        style={{ color: 'white', padding, background: color }}
-                    >
-                        {icon && <img src={icon} style={{ width: iconSize, marginRight: 10 }} />}
-                        {title || children || 'title or children'}
-                    </div>
-                    :
-                    <div
-                        role="button"
-                        className={styles.button}
-                        style={{ color: 'white', padding, background: color }}
-                    >
-                        {title || children || 'title or children'}
-                        {icon && <img src={icon} style={{ width: iconSize, marginLeft: 10 }} />}
-                    </div>
-            )
+            styling = { color: 'white', padding, background: color };
+            break;
     }
+
+    return (
+        <div
+            role="button"
+            className={styles.button}
+            style={styling}
+        >
+            <TextAndIcon />
+        </div>
+    )
 }
 
 Button.defaultProps = {
