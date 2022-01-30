@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+//  COMPONENTS
+import RippleEffect from './RippleEffect';
+//  STYLES
 import styles from './button.module.css'
 
 
@@ -18,7 +21,26 @@ import styles from './button.module.css'
 */
 
 export default function Button({ type, title, children, color, padding, icon, iconSize, reverse }) {
+    const [button, setButton] = useState(null)
+    const [ripple, showRipple] = useState(false)
+    const [x, setX] = useState(null)
+    const [y, setY] = useState(null)
     let location, margin, styling;
+
+
+    useEffect(() => {
+        setButton(document.getElementsByName('button'))
+        return () => setButton(document.getElementsByName('button'))
+    }, []);
+
+
+    function handleClick(e) {
+        showRipple(true)
+        setX(e.clientX)
+        setY(e.clientY)
+        // add call to parent function here 
+    }
+
 
     //  Determin wheter icon (if provided as prop) should render on left or right side of text and adds margin between content
     function TextAndIcon() {
@@ -64,6 +86,7 @@ export default function Button({ type, title, children, color, padding, icon, ic
         }
     }
 
+
     //  Determin Buttontype to render
     switch (type) {
         case 'text':
@@ -77,13 +100,17 @@ export default function Button({ type, title, children, color, padding, icon, ic
             break;
     }
 
+
     return (
         <div
+            name="button"
+            onClick={handleClick}
             role="button"
             className={styles.button}
             style={styling}
         >
             <TextAndIcon />
+            {ripple && <RippleEffect x={x} y={y} showRipple={showRipple} />}
         </div>
     )
 }

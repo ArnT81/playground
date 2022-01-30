@@ -1,0 +1,23 @@
+.ripple {
+    position: absolute;
+    background: radial-gradient(transparent, white);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    border-radius: 50%;
+    z-index: 100;
+    animation: rippleEffect .2s linear;
+    animation-iteration-count: 1;
+}
+
+@keyframes rippleEffect {
+0% {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    }
+100% {
+    opacity: 1;
+    width: 100px;
+    height: 100px;
+    }
+}

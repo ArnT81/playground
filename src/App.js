@@ -1,39 +1,34 @@
 import React from 'react'
+//  COMPONENTS
 import Button from './components/Button';
 import Checkbox from './components/Checkbox';
-//  images & icons 
+//  IMAGES & ICONS 
 import bil from './bil.svg'
 
 function App() {
 
 
   return (
-
     <>
-      {/* //!work in progress */}
 
-      {/* <p>hello</p> */}
-
+      {/*//todo input label with moving placeholder on focus */}
 
 
-
-      {/* //!done */}
       {/* <Checkbox /> */}
 
-
-      <Button
+      {/* <Button
         type="text"
         type="outlined"
         type="filled"
-        icon={bil}
         reverse
-      // iconSize='20px'
-      title='from props'
+        iconSize='60px'
+        icon={bil}
+        title='from props'
       >
-        {/* <img src={bil} style={{ width: 30 }} /> */}
-        {/* <>from children</> */}
+        <img src={bil} style={{ width: 30 }} />
+        <>from children</>
+      </Button> */}
 
-      </Button>
     </>
   )
 }
