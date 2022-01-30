@@ -41,11 +41,11 @@ export default function Button({ type, title, children, color, padding, icon, ic
                 </div>
             )
         }
-        // only one child
+        // only one child from props
         if (!children.length) {
             return children
         }
-        // more than one child (hence the need of fra)
+        // more than one child
         if (children.length) {
             return (
                 <div style={{ display: 'flex', alignItems: 'center', flexDirection: location }}>
