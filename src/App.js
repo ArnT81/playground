@@ -25,13 +25,13 @@ function App() {
         type="text"
         type="outlined"
         type="filled"
-        // icon={bil}
-        iconRight
+        icon={bil}
+        reverse
       // iconSize='20px'
-      // title='from props'
+      title='from props'
       >
         {/* <img src={bil} style={{ width: 30 }} /> */}
-        <h1>Press</h1>
+        {/* <>from children</> */}
 
       </Button>
     </>

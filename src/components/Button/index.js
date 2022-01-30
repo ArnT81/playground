@@ -2,30 +2,36 @@ import React from 'react';
 import styles from './button.module.css'
 
 
-/* 
+/** 
+*   !important!! 
+**  Do not mix props.children with props
+**  props.children needs to be contained within a fragment or tag or every letter on eventual string will count as a child and 
+*   the component will try to map it (all margins for paragraph and headers removed)
+*   
+*
+**  Possible props
 *   Types: text / outline / filled
 *   Buttontext: title / props.children
 *   icon: may be added as props
-*   iconRight: may be added to render the icon to the right of the text
+*   reverse: may be added to render the icon to the right of the text or reverse order for props.children
 *   color, padding & iconsize should not be altered in props if you want consistency throughout the app
 */
-//todo padding for the case both text & icon are added as children or only icon is in button
-export default function Button({ type, title, children, color, padding, icon, iconSize, iconRight }) {
+
+export default function Button({ type, title, children, color, padding, icon, iconSize, reverse }) {
     let location, margin, styling;
 
-    console.log(children);
-    //  Determin wheter icon (if provided as prop) should render on left or right side of text 
+    //  Determin wheter icon (if provided as prop) should render on left or right side of text and adds margin between content
     function TextAndIcon() {
-        if (iconRight) {
+        if (reverse) {
             location = 'row-reverse';
             margin = '0 0 0 10px';
-        } if (!iconRight) {
+        } if (!reverse) {
             location = 'row';
             margin = '0 10px 0 0';
-        } if(!title || !icon) {
+        }
+        if (!title && !children || !icon && !children) {
             margin = 0
         }
-
         // icon and text sent in as props
         if (!children) {
             return (
@@ -39,10 +45,23 @@ export default function Button({ type, title, children, color, padding, icon, ic
         if (!children.length) {
             return children
         }
-        // more than one child
-
-
-
+        // more than one child (hence the need of fra)
+        if (children.length) {
+            return (
+                <div style={{ display: 'flex', alignItems: 'center', flexDirection: location }}>
+                    {children.map((child, i) => {
+                        // only margin on the first child
+                        if (i == 0) {
+                            return (
+                                <span key={i} style={{ margin }}>{child}</span>
+                            )
+                        } else {
+                            return <span key={i}>{child}</span>
+                        }
+                    })}
+                </div>
+            )
+        }
     }
 
     //  Determin Buttontype to render
