@@ -26,11 +26,11 @@ function App() {
         type="outlined"
         type="filled"
         icon={bil}
+        iconRight
       // iconSize='20px'
-      // iconRight
-      // title='title from props'
+      // title='from props'
       >
-        {/* <img src={bil} style={{width: 30, height: 30}}/> */}
+        {/* <img src={bil} style={{ width: 30 }} /> */}
         {/* Press */}
 
       </Button>

@@ -13,21 +13,36 @@ import styles from './button.module.css'
 export default function Button({ type, title, children, color, padding, icon, iconSize, iconRight }) {
     let location, margin, styling;
 
+    console.log(children);
     //  Determin wheter icon (if provided as prop) should render on left or right side of text 
     function TextAndIcon() {
         if (iconRight) {
             location = 'row-reverse';
             margin = '0 0 0 10px';
-        } else {
+        } if (!iconRight) {
             location = 'row';
             margin = '0 10px 0 0';
+        } if(!title || !icon) {
+            margin = 0
         }
-        return (
-            <div style={{ display: 'flex', alignItems: 'center', flexDirection: location }}>
-                {icon && <img src={icon} style={{ width: iconSize, margin, fill: color }} />}
-                {children || title}
-            </div>
-        )
+
+        // icon and text sent in as props
+        if (!children) {
+            return (
+                <div style={{ display: 'flex', alignItems: 'center', flexDirection: location }}>
+                    {icon && <img src={icon} style={{ width: iconSize, margin, fill: color }} />}
+                    {children || title}
+                </div>
+            )
+        }
+        // only one child
+        if (!children.length) {
+            return children
+        }
+        // more than one child
+
+
+
     }
 
     //  Determin Buttontype to render
