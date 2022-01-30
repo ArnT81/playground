@@ -1,0 +1,45 @@
+:root {
+    --padding: 10px;
+}
+
+.input {
+    position: relative;
+    display: flex;
+    margin: 100px; /* temporary */
+}
+
+.input input{
+    padding-left: var(--padding);
+    background: inherit;
+    border: 2px solid black;
+}
+
+.input input:focus + .floatingLabel{
+    top: -19%;
+    left: 2.5px;
+    background: grey; 
+    z-index: 100;
+    width: fit-content;
+    height: fit-content;
+    font-size: small;
+    padding: 0 calc(var(--padding)/2);
+}
+
+.input input:focus {
+    background: inherit;
+    outline: none;
+}
+
+.floatingLabel {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: calc(100% - var(--padding));
+    height: 100%;
+    background: inherit;
+    display: flex;
+    align-items: center;
+    padding-left: var(--padding);
+    z-index: -1;
+}
+

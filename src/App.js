@@ -2,6 +2,7 @@ import React from 'react'
 //  COMPONENTS
 import Button from './components/Button';
 import Checkbox from './components/Checkbox';
+import Input from './components/Input';
 //  IMAGES & ICONS 
 import bil from './bil.svg'
 
@@ -10,6 +11,10 @@ function App() {
 
   return (
     <>
+
+      <Input
+        placeholder='temp'
+      />
 
       {/*//todo input label with moving placeholder on focus */}
 

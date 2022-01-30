@@ -20,7 +20,7 @@ import styles from './button.module.css'
 *   color, padding & iconsize should not be altered in props if you want consistency throughout the app
 */
 
-export default function Button({ type, title, children, color, padding, icon, iconSize, reverse }) {
+export default function Button({ functionality, type, title, children, color, padding, icon, iconSize, reverse }) {
     const [button, setButton] = useState(null)
     const [ripple, showRipple] = useState(false)
     const [x, setX] = useState(null)
@@ -35,10 +35,10 @@ export default function Button({ type, title, children, color, padding, icon, ic
 
 
     function handleClick(e) {
-        showRipple(true)
-        setX(e.clientX)
-        setY(e.clientY)
-        // add call to parent function here 
+        showRipple(true);
+        setX(e.clientX);
+        setY(e.clientY);
+        functionality();
     }
 
 
