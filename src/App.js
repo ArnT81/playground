@@ -8,13 +8,31 @@ import bil from './bil.svg'
 
 function App() {
 
+  function submit() {
+    console.log('happens');
+  }
 
   return (
-    <>
 
+
+
+    <>
       <Input
         placeholder='temp'
-      />
+      >
+        <Button
+          type="text"
+          type="outlined"
+          type="filled"
+          reverse
+          iconSize='60px'
+          icon={bil}
+          title='from props'
+          functionality={submit}
+        />
+
+      </Input>
+
 
       {/*//todo input label with moving placeholder on focus */}
 

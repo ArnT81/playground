@@ -36,8 +36,8 @@ export default function Button({ functionality, type, title, children, color, pa
 
     function handleClick(e) {
         showRipple(true);
-        setX(e.clientX);
-        setY(e.clientY);
+        setX(e.clientX - button[0].getBoundingClientRect().x);
+        setY(e.clientY - button[0].getBoundingClientRect().y);
         functionality();
     }
 
