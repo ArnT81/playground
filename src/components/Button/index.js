@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 //  COMPONENTS
-import RippleEffect from './RippleEffect';
+import RippleEffect from './Effects/RippleEffect';
+import WaveEffect from './Effects/WaveEffect';
 //  STYLES
-import styles from './button.module.css'
+import styles from './button.module.css';
 
 
 /** 
@@ -20,9 +21,21 @@ import styles from './button.module.css'
 *   color, padding & iconsize should not be altered in props if you want consistency throughout the app
 */
 
-export default function Button({ functionality, type, title, children, color, padding, icon, iconSize, reverse }) {
+export default function Button({
+    functionality,
+    type,
+    title,
+    children,
+    color,
+    padding,
+    icon,
+    iconSize,
+    reverse,
+    ripple,
+    wave
+}) {
     const [button, setButton] = useState(null)
-    const [ripple, showRipple] = useState(false)
+    const [renderEffect, setRenderEffect] = useState(true)
     const [x, setX] = useState(null)
     const [y, setY] = useState(null)
     let location, margin, styling;
@@ -35,7 +48,7 @@ export default function Button({ functionality, type, title, children, color, pa
 
 
     function handleClick(e) {
-        showRipple(true);
+        setRenderEffect(true);
         setX(e.clientX - button[0].getBoundingClientRect().x);
         setY(e.clientY - button[0].getBoundingClientRect().y);
         functionality();
@@ -110,7 +123,8 @@ export default function Button({ functionality, type, title, children, color, pa
             style={styling}
         >
             <TextAndIcon />
-            {ripple && <RippleEffect x={x} y={y} showRipple={showRipple} />}
+            {renderEffect && ripple && x && y && <RippleEffect x={x} y={y} renderMe={setRenderEffect} />}
+            {renderEffect && x && wave && <WaveEffect renderMe={setRenderEffect} />}
         </div>
     )
 }

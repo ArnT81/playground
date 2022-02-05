@@ -1,0 +1,38 @@
+:root {
+    --color: rgba(0,0,0,.5);
+    --color: #339998;
+    --gradient: linear-gradient(
+        100deg, 
+        transparent, 
+        var(--color), 
+        transparent, 
+        var(--color), 
+        transparent, 
+        var(--color),
+        transparent,
+        var(--color),
+        transparent,
+        var(--color),
+        transparent
+    )
+}
+
+.vawe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: var(--gradient);
+    background-size: 400% ;
+    animation: vawe .5s linear;
+}
+
+@keyframes vawe {
+0% {
+    background-position: left;
+    }
+100% {
+    background-position: right;
+    }
+}

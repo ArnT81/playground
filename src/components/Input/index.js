@@ -1,19 +1,28 @@
 import React, { useState, useRef } from 'react';
-//  COMPONENTS
-import Button from '../Button';
 //  STYLES
 import styles from './input.module.css';
 
 
-//  todo flytta ut logiken för submit till container, bakgrundsfärg inherit på floatingLabel även när den är i fokus  
-export default function Input({ children, placeholder }) {
+export default function Input({ children, placeholder, background, color }) {
     const inputRef = useRef();
-    const [inpuValue, setInputValue] = useState();
+    const [inputValue, setInputValue] = useState();
+    const [styling, setStyling] = useState(styles.floatingLabel)
 
     function handleChange(e) {
-        setInputValue({ ...inpuValue, [e.target.name]: e.target.value })
+        setInputValue([...e.target.value])
     }
 
+    function focused() {
+        setStyling(`${styles.floatingLabel} ${styles.labelMoved}`)
+    }
+
+    function blurred() {
+        if (inputValue?.length >= 1) {
+            return
+        } else {
+            setStyling(styles.floatingLabel)
+        }
+    }
 
     return (
         <div className={styles.input}>
@@ -22,11 +31,20 @@ export default function Input({ children, placeholder }) {
                 onChange={handleChange}
                 type='text'
                 ref={inputRef}
+                onFocus={focused}
+                onBlur={blurred}
+
             />
-            <span className={styles.floatingLabel}>
+            <span className={styling} style={{ background, color }}>
                 <p>{placeholder}</p>
             </span>
             {children}
         </div >
     )
+}
+
+Input.defaultProps = {
+    placeholder: 'props.placeholder',
+    background: 'white',
+    color: 'black'
 }

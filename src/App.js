@@ -13,12 +13,12 @@ function App() {
   }
 
   return (
-
-
-
     <>
-      <Input
-        placeholder='temp'
+
+      {/* <Input
+        // placeholder='temp'
+        // background='gray'
+        // color='red'
       >
         <Button
           type="text"
@@ -30,27 +30,28 @@ function App() {
           title='from props'
           functionality={submit}
         />
+      </Input> */}
 
-      </Input>
 
-
-      {/*//todo input label with moving placeholder on focus */}
-
+      
 
       {/* <Checkbox /> */}
 
-      {/* <Button
+      <Button
         type="text"
         type="outlined"
         type="filled"
         reverse
         iconSize='60px'
-        icon={bil}
-        title='from props'
+        // icon={bil}
+        // title='from props'
+        functionality={submit}
+        // ripple
+        wave
       >
         <img src={bil} style={{ width: 30 }} />
         <>from children</>
-      </Button> */}
+      </Button>
 
     </>
   )
