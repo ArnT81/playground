@@ -2,23 +2,26 @@ import React, { useEffect, useRef, useState } from 'react';
 //  COMPONENTS
 import RippleEffect from './Effects/RippleEffect';
 import WaveEffect from './Effects/WaveEffect';
+import ShadowEffect from './Effects/ShadowEffect';
 //  STYLES
 import styles from './button.module.css';
 
 
 /** 
 *   !important!! 
-**  Do not mix props.children with props
-**  props.children needs to be contained within a fragment or tag or every letter on eventual string will count as a child and 
-*   the component will try to map it (all margins for paragraph and headers removed)
-*   
+*  props.children needs to be contained within a fragment or tag or every letter on eventual string will count as a child  and the component will try to map it (all margins for paragraph and headers removed)   
 *
 **  Possible props
+*   Buttonclick: functionality props
 *   Types: text / outline / filled
 *   Buttontext: title / props.children
-*   icon: may be added as props
-*   reverse: may be added to render the icon to the right of the text or reverse order for props.children
+*   icon: may be added as props or children
+*   iconSize: number or string
+*   reverse: reverse the order of buttons content
 *   color, padding & iconsize should not be altered in props if you want consistency throughout the app
+*
+**  Effects
+*   ripple, wave, shadow
 */
 
 export default function Button({
@@ -32,7 +35,8 @@ export default function Button({
     iconSize,
     reverse,
     ripple,
-    wave
+    wave,
+    shadow
 }) {
     const [button, setButton] = useState(null)
     const [renderEffect, setRenderEffect] = useState(true)
@@ -40,12 +44,10 @@ export default function Button({
     const [y, setY] = useState(null)
     let location, margin, styling;
 
-
     useEffect(() => {
         setButton(document.getElementsByName('button'))
         return () => setButton(document.getElementsByName('button'))
     }, []);
-
 
     function handleClick(e) {
         setRenderEffect(true);
@@ -53,7 +55,6 @@ export default function Button({
         setY(e.clientY - button[0].getBoundingClientRect().y);
         functionality();
     }
-
 
     //  Determin wheter icon (if provided as prop) should render on left or right side of text and adds margin between content
     function TextAndIcon() {
@@ -99,7 +100,6 @@ export default function Button({
         }
     }
 
-
     //  Determin Buttontype to render
     switch (type) {
         case 'text':
@@ -113,7 +113,6 @@ export default function Button({
             break;
     }
 
-
     return (
         <div
             name="button"
@@ -125,6 +124,7 @@ export default function Button({
             <TextAndIcon />
             {renderEffect && ripple && x && y && <RippleEffect x={x} y={y} renderMe={setRenderEffect} />}
             {renderEffect && x && wave && <WaveEffect renderMe={setRenderEffect} />}
+            {renderEffect && x && shadow && <ShadowEffect renderMe={setRenderEffect} color={color} />}
         </div>
     )
 }

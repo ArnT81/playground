@@ -12,7 +12,6 @@ export default function RippleEffect({ renderMe, x, y }) {
         return () => setTimeout(() => { renderMe(false) }, 200)
     }, [])
 
-
     return (
         <HideOverflow>
             <span className={styles.ripple} style={{ left: x, top: y }}></span>

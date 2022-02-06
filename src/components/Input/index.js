@@ -1,15 +1,13 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 //  STYLES
 import styles from './input.module.css';
 
 
-export default function Input({ children, placeholder, background, color }) {
-    const inputRef = useRef();
-    const [inputValue, setInputValue] = useState();
+export default function Input({ inputValue, handleInput, children, placeholder, background, color }) {
     const [styling, setStyling] = useState(styles.floatingLabel)
 
     function handleChange(e) {
-        setInputValue([...e.target.value])
+        handleInput(e)
     }
 
     function focused() {
@@ -30,10 +28,8 @@ export default function Input({ children, placeholder, background, color }) {
                 name='input'
                 onChange={handleChange}
                 type='text'
-                ref={inputRef}
                 onFocus={focused}
                 onBlur={blurred}
-
             />
             <span className={styling} style={{ background, color }}>
                 <p>{placeholder}</p>

@@ -25,13 +25,10 @@
     height: 100%;
     background-image: var(--gradient);
     background-size: 400% ;
-    animation: vawe .5s linear;
+    animation: vawe .7s linear;
 }
 
 @keyframes vawe {
-0% {
-    background-position: left;
-    }
 100% {
     background-position: right;
     }

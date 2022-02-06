@@ -6,10 +6,9 @@ import styles from './wave.module.css'
 
 function Wave({ renderMe }) {
     useEffect(() => {
-        setTimeout(() => { renderMe(false) }, 300)
-        return () => setTimeout(() => { renderMe(false) }, 300)
+        setTimeout(() => { renderMe(false) }, 700)
+        return () => setTimeout(() => { renderMe(false) }, 700)
     })
-
 
     return (
         <div>

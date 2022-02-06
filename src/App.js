@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 //  COMPONENTS
 import Button from './components/Button';
 import Checkbox from './components/Checkbox';
@@ -7,18 +7,42 @@ import Input from './components/Input';
 import bil from './bil.svg'
 
 function App() {
+  const [checked, setChecked] = useState(false);
+  const [inputValue, setInputValue] = useState();
 
+
+  //  for button
   function submit() {
     console.log('happens');
   }
 
+  //  for checkbox
+  function handleChange() {
+    setChecked(!checked)
+  }
+
+  // for input
+  function handleInput(e) {
+    setInputValue([...e.target.value])
+  }
+
+
   return (
     <>
 
-      {/* <Input
-        // placeholder='temp'
-        // background='gray'
-        // color='red'
+      {/* <Checkbox
+        handleChange={handleChange}
+        checked={checked}
+        margin='20px'
+      /> */}
+
+
+      <Input
+        inputValue={inputValue}
+        handleInput={handleInput}
+        placeholder='temp'
+      // background='gray'
+      // color='red'
       >
         <Button
           type="text"
@@ -29,15 +53,15 @@ function App() {
           icon={bil}
           title='from props'
           functionality={submit}
+          // ripple
+        wave
+        // shadow
         />
-      </Input> */}
+      </Input>
 
 
-      
 
-      {/* <Checkbox /> */}
-
-      <Button
+      {/* <Button
         type="text"
         type="outlined"
         type="filled"
@@ -47,11 +71,12 @@ function App() {
         // title='from props'
         functionality={submit}
         // ripple
-        wave
+        // wave
+        shadow
       >
         <img src={bil} style={{ width: 30 }} />
         <>from children</>
-      </Button>
+      </Button> */}
 
     </>
   )

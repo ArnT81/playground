@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './checkbox.module.css'
 
 
-export default function Checkbox() {
-    const [checked, setChecked] = useState(false)
+export default function Checkbox({ margin, checked, handleChange }) {
 
     return (
-        <div style={{ margin: 10 }}>
+        <div style={{ margin }}>
             <label
                 htmlFor="checkbox"
                 className={styles.switch}
@@ -15,11 +14,15 @@ export default function Checkbox() {
                     type='checkbox'
                     id="checkbox"
                     checked={checked}
-                    onChange={() => setChecked(!checked)}
+                    onChange={handleChange}
                 />
                 <span className={styles.slider} />
             </label>
-            <p>{checked.toString()}</p>
+            <p>{checked.toString()}</p> {/* temporary */}
         </div>
     )
+}
+
+Checkbox.defaultProps = {
+    margin: 10
 }
